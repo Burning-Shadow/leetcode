@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function deleteMinNum(arr, remainder) {
+      let i;
+      for (i = arr.length - 1; i > -1; i--) {
+        if (arr[i] % 3 === remainder) {
+          arr.splice(i, 1);
+          return arr.join("").toString();
+        }
+      }
+      return -1;
+    }
+
+    function getSum(arr) {
+      return arr.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      });
+    }
+
+    var largestMultipleOfThree = function (digits) {
+      let num, remainder;
+
+      digits.sort((a, b) => {
+        return b - a;
+      });
+
+      let sum = getSum(digits);
+
+      remainder = sum % 3;
+      num = digits.join("");
+
+      if (num == 0) {
+        return "0";
+      } else if (num >= 3) {
+        if (remainder === 0) {
+          return num.toString();
+        } else if (remainder === 1) {
+          let len = digits.length - 1,
+            count = 2,
+            i,
+            result;
+
+          // 余数为1，删除1个余数为1的数
+          result = deleteMinNum(digits, remainder);
+          if (result === -1) {
+            // 余数为1，删除2个余数为2的数
+            i = len;
+            while (i > -1) {
+              if (digits[i] % 3 === 2) {
+                digits.splice(i, 1);
+                if (count === 1) {
+                  return digits.join("").toString();
+                } else {
+                  count--;
+                }
+              }
+              i--;
+            }
+          } else {
+            return result;
+          }
+        } else {
+          let len = digits.length - 1,
+            count = 2,
+            i;
+
+          // 余数为2，删除1个余数为2的数
+          i = len;
+          while (i > -1) {
+            if (digits[i] % 3 === 2) {
+              digits.splice(i, 1);
+              return digits.join("").toString();
+            }
+            i--;
+          }
+
+          i = len;
+          // 余数为2，删除2个余数为1的数
+          while (count > 0 && i > -1) {
+            if (digits[i] % 3 === 1) {
+              digits.splice(i, 1);
+              if (count === 1) {
+                return digits.join("").toString();
+              } else {
+                count--;
+              }
+            }
+            i--;
+          }
+        }
+      } else {
+        return "";
+      }
+    };
+    console.log(largestMultipleOfThree([8, 6, 7, 1, 0]));
+  </script>
+  <body></body>
+</html>
