@@ -2,36 +2,6 @@
  * @param {character[][]} grid
  * @return {number}
  */
-//  var numIslands = function(grid) {
-//   let cnt = 0;
-//   const m = grid.length;
-//   const n = grid[0].length;
-
-//   // 建立二维数组
-//   let dp = new Array(m).fill('0').map(() => new Array(n).fill('0'));
-
-//   const dfs = (i, j) => {
-//     if (grid[i][j] === '1' && dp[i][j] === '0') {
-//       dp[i][j] = '1';
-//       if (i - 1 >= 0 && grid[i - 1][j] === '1' && dp[i - 1][j] === '0') dfs(i - 1, j);
-//       if (i + 1 < m && grid[i + 1][j] === '1' && dp[i + 1][j] === '0') dfs(i + 1, j);
-//       if (j - 1 >= 0 && grid[i][j - 1] === '1' && dp[i][j - 1] === '0') dfs(i, j - 1);
-//       if (j + 1 < n && grid[i][j + 1] === '1' && dp[i][j + 1] === '0') dfs(i, j + 1);
-//     }
-//   };
-
-//   for (let i = 0; i < m; i++) {
-//     for (let j = 0; j < n; j++) {
-//       if (grid[i][j] === '1' && dp[i][j] === '0') {
-//         cnt += 1;
-//         dfs(i, j);
-//       }
-//     }
-//   }
-
-//   return cnt;
-// };
-
 var numIslands = function(grid) {
   if (!grid) return 0;
   let cnt = 0;
@@ -69,6 +39,43 @@ var numIslands = function(grid) {
             neighbors.push([p, q + 1]);
           }
         }
+      }
+    }
+  }
+
+  return cnt;
+};
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ * 
+ * dfs，改变原数组
+ */
+ var numIslands = function(grid) {
+  const m = grid.length;
+  const n = grid[0].length;
+  let cnt = 0;
+
+  const judgeLeagal = (i, j) => {
+    if (i < 0 || i >= m || j < 0 || j >= n) return false;
+    return true;
+  };
+
+  const dfs = (i, j) => {
+    if (!judgeLeagal(i, j) || grid[i][j] === '0') return;
+    grid[i][j] = '0';
+    dfs(i + 1, j);
+    dfs(i - 1, j);
+    dfs(i, j + 1);
+    dfs(i, j - 1);
+  };
+
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === '1') {
+        cnt++;
+        dfs(i, j);
       }
     }
   }
