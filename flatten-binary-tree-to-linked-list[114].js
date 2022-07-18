@@ -9,24 +9,12 @@ function TreeNode(val, left, right) {
  * @return {void} Do not return anything, modify root in-place instead.
  */
 var flatten = function (root) {
-  const list = [];
-
-  const dfs = (root) => {
-    if (root != null) {
-      list.push(root);
-      dfs(root.left);
-      dfs(root.right);
-    }
-  }
-
-  dfs(root);
-
-  const size = list.length;
-  for (let i = 1; i < size; i++) {
-    const prev = list[i - 1],
-      curr = list[i];
-    prev.left = null;
-    prev.right = curr;
-  }
+  if (!root) return;
+  flatten(root.left);
+  const right = root.right;
+  root.right = root.left;
+  root.left = null;
+  while (root.right) root = root.right;
+  flatten(right);
+  root.right = right;
 };
-
