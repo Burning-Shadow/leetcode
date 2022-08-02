@@ -6,7 +6,7 @@
   nums.sort((a, b) => a - b);
   const result = [];
   const len = nums.length;
-  const vis = new Array(nums.length).fill(false);
+  const used = new Array(len).fill(false);
 
   const backtrace = (idx, perm) => {
     if (idx === len) {
@@ -14,13 +14,13 @@
       return;
     }
     for (let i = 0; i < len; ++i) {
-      // vis[i]表示当前元素已经在路径中，跳过；第二段用来剪枝，当前数组和前一位相同并且前一位没有被用过
-      if (vis[i] || (i > 0 && nums[i] === nums[i - 1] && !vis[i - 1])) continue;
+      // used[i] 表示当前元素已经在路径中，跳过；第二段用来剪枝，当前数组和前一位相同并且前一位没有被用过
+      if (used[i] || (i > 0 && nums[i] === nums[i - 1] && !used[i - 1])) continue;
 
       perm.push(nums[i]);
-      vis[i] = true;
+      used[i] = true;
       backtrace(idx + 1, perm);
-      vis[i] = false;
+      used[i] = false;
       perm.pop();
     }
   }
