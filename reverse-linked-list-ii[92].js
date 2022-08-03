@@ -13,17 +13,17 @@
  */
 var reverseBetween = function (head, left, right) {
   const dummyNode = new ListNode(-1);
-  dummyNode.next = head;//虚拟头节点
+  dummyNode.next = head;  // 虚拟头节点
 
   let pre = dummyNode;
   for (let i = 0; i < left - 1; i++) pre = pre.next;
 
   let rightNode = pre;
-  //rightNode遍历到right的位置
+  // rightNode 遍历到 right 的位置
   for (let i = 0; i < right - left + 1; i++) rightNode = rightNode.next;
 
-  let leftNode = pre.next;//保存leftNode
-  let curr = rightNode.next;//保存rightNode.next
+  let leftNode = pre.next;  // 保存 leftNode
+  let curr = rightNode.next;  // 保存 rightNode.next
 
   //切断left到right的子链
   pre.next = null;
