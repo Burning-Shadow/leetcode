@@ -2,18 +2,21 @@
  * @param {string[]} deadends
  * @param {string} target
  * @return {number}
+ * 
+ * bfs
+ * 既然需要记录 step 那么最好的方式一定是层序遍历。而对应的算法就是 bfs
  */
 var openLock = function (deadends, target) {
   let step = 0;
   const deadSet = new Set(deadends);
   const visitedSet = new Set();
 
-  const q = ["0000"];
+  const queue = ["0000"];
 
-  while (q.length) {
-    const size = q.length;
+  while (queue.length) {
+    const size = queue.length;
     for (let i = 0; i < size; i++) {
-      const node = q.shift();
+      const node = queue.shift();
       if (node == target) return step;
       if (visitedSet.has(node)) continue;
       if (deadSet.has(node)) continue;
@@ -23,8 +26,8 @@ var openLock = function (deadends, target) {
         const num = node[j] - '0';
         const up = (num + 1) % 10;
         const down = (num + 9) % 10;
-        q.push(node.substring(0, j) + up + node.substring(j + 1));
-        q.push(node.substring(0, j) + down + node.substring(j + 1));
+        queue.push(node.substring(0, j) + up + node.substring(j + 1));
+        queue.push(node.substring(0, j) + down + node.substring(j + 1));
       }
     }
     step++;
