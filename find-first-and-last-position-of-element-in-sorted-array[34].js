@@ -2,31 +2,33 @@
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
+ * 
+ * 两轮复杂度为 O(logn) 的二分查找
  */
 var searchRange = function (nums, target) {
   const result = [-1, -1];
   const len = nums.length;
   if (len === 0) return result;
-  let l = 0,
-    r = len - 1;
+  let left = 0,
+    right = len - 1;
 
-  while (l < r) {
-    let mid = (l + r) / 2 | 0;
-    if (target <= nums[mid]) r = mid;
-    else l = mid + 1
+  while (left < right) {
+    let mid = ((left + right) >> 1) | 0;
+    if (target <= nums[mid]) right = mid;
+    else left = mid + 1
   }
 
-  if (nums[l] !== target) return result;
-  result[0] = l;
+  if (nums[left] !== target) return result;
+  result[0] = left;
 
-  r = len - 1;
-  while (l < r) {
-    let mid = (l + r) / 2 | 0;
-    if (target >= nums[mid]) l = mid + 1
-    else r = mid;
+  right = len - 1;
+  while (left < right) {
+    let mid = (left + right) >> 1 | 0;
+    if (target >= nums[mid]) left = mid + 1
+    else right = mid;
   }
-  if (nums[r] === target) result[1] = r
-  else result[1] = r - 1
+  if (nums[right] === target) result[1] = right
+  else result[1] = right - 1
   return result;
 };
 
