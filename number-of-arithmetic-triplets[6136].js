@@ -1,3 +1,5 @@
+// https://leetcode.cn/contest/weekly-contest-305
+
 /**
  * @param {number[]} nums
  * @param {number} diff
