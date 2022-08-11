@@ -1,16 +1,18 @@
 /**
  * @param {number} columnNumber
  * @return {string}
+ * 
+ * 整除取余
  */
 var convertToTitle = function (columnNumber) {
-  let ans = [];
+  let subString = [];
   while (columnNumber > 0) {
     const a0 = (columnNumber - 1) % 26 + 1;
-    ans.push(String.fromCharCode(a0 - 1 + 'A'.charCodeAt()));
+    subString.push(String.fromCharCode(a0 - 1 + 'A'.charCodeAt()));
     columnNumber = Math.floor((columnNumber - a0) / 26);
   }
-  ans.reverse();
-  return ans.join('');
+  subString.reverse();
+  return subString.join('');
 };
 
 console.log(convertToTitle(1)); // A
