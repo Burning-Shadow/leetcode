@@ -2,7 +2,7 @@
  * @param {number[]} arr
  * @return {number}
  * 
- * dfs 超时
+ * dfs 超时。length 长度最多为 3 * 10^4，复杂度降不下来
  */
 var sumSubarrayMins = function (arr) {
   const len = arr.length;

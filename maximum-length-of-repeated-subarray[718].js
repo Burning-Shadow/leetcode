@@ -30,6 +30,8 @@ var findLength = function (nums1, nums2) {
  * @return {number}
  * 
  * dp 降维优化
+ * 由于二维数组只在对角线上有作用，故可以简化为一位数组
+ * https://leetcode.cn/problems/maximum-length-of-repeated-subarray/solution/zhe-yao-jie-shi-ken-ding-jiu-dong-liao-by-hyj8/
  */
 const findLength = (A, B) => {
   const m = A.length;
@@ -52,6 +54,7 @@ const findLength = (A, B) => {
  * @return {number}
  * 
  * 滑窗
+ * 想象两把错开的尺子
  */
 const findLength = (nums1, nums2) => {
   const len1 = nums1.length;
