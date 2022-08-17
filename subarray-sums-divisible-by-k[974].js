@@ -32,26 +32,32 @@ var subarraysDivByK = function (nums, k) {
  * @return {number}
  * 
  * 前缀和 + 模运算
+ * 假设前缀和 befores1 和 befores2，只要 befores1 % k === befores2 % k，这样 befores1 和 befores2 之间的数组成的子数组之和就能被K整除；
  * https://leetcode.cn/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/
  */
-const subarraysDivByK = (A, K) => {
-  let preSumModK = 0;
+var subarraysDivByK = function (nums, k) {
+  let len = nums.length;
+  let befores = [0];
+  for (let i = 0; i < len; i++) befores.push(befores[i] + nums[i]);
+  console.log('befores = ', befores);
+
   let count = 0;
-  const map = { 0: 1 };
-  for (let i = 0; i < A.length; i++) {
-    preSumModK = (preSumModK + A[i]) % K; // 递推式子
-    if (preSumModK < 0) {
-      preSumModK += K;
+  let map = new Map();
+  map.set(0, 1);
+
+  for (let i = 1; i <= len; i++) {
+    let mod = ((befores[i] % k) + k) % k;
+    console.log('MOD = ', mod);
+    if (map.has(mod)) {
+      count += map.get(mod);
+      console.log('count = ', count);
     }
-    if (map[preSumModK]) {      // 已经存在于map
-      count += map[preSumModK]; // 把对应的次数累加给count
-      map[preSumModK]++;        // 并且更新出现次数，次数+1
-    } else {
-      map[preSumModK] = 1;      // 之前没出现过，初始化值为1
-    }
+    let c = map.has(mod) ? map.get(mod) : 0;
+    map.set(mod, c + 1);
   }
+  console.log(map);
   return count;
-};
+}
 
 
 console.log(subarraysDivByK([4, 5, 0, -2, -3, 1], 5)); // 7
