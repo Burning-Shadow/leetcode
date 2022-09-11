@@ -45,7 +45,7 @@ var minGroups = function (intervals) {
     diff[right + 1]--;
   }
 
-  console.log(diff);
+  // console.log(diff);
 
   let ans = 0, sum = 0;
   for (const num of diff) {
