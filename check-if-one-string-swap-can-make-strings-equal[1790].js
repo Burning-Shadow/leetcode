@@ -3,7 +3,7 @@
  * @param {string} s2
  * @return {boolean}
  * 
- * map 统计技术
+ * map 统计计数
  */
 var areAlmostEqual = function (s1, s2) {
   const len = s1.length;
