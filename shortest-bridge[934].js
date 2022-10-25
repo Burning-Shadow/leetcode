@@ -114,7 +114,10 @@ const dfs = (x, y, grid, queue) => {
 };
 
 
-
+/**
+ * https://leetcode.cn/problems/shortest-bridge/solution/-by-muse-77-j7w5/
+ * 爪哇慕斯的题解也比较有意思
+*/
 
 console.log(shortestBridge([[0, 1], [1, 0]])); // 1
 console.log(shortestBridge([[0, 1, 0], [0, 0, 0], [0, 0, 1]])); // 2
