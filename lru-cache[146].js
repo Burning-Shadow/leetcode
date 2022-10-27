@@ -30,6 +30,7 @@ LRUCache.prototype.put = function (key, value) {
     this.map.delete(key);
   }
   if (this.map.size == this.capacity) {
+    // Map.keys() 返回对象为一个 MapIterator，故采取 .next() 的方式拿到对应的值
     const { value: key } = this.map.keys().next();
     this.map.delete(key);
   }
