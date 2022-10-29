@@ -123,5 +123,31 @@ function getElement(arr, n, i) {
 }
 
 
+/**
+ * @param {number[]} arr
+ * @return {number}
+ * 
+ * 好理解但慢
+ */
+ var sumSubarrayMins = function (arr) {
+  let len = arr.length
+  let mod = 10 ** 9 + 7
+  let ans = 0
+  for (let i = 0; i < len; i++) {
+    let tempCount = 0
+    let min = arr[i]
+    for (let j = i; j < len; j++) {
+      if (arr[j] <= min) {
+        min = arr[j]
+      }
+      tempCount += min
+    }
+    ans += tempCount
+  }
+  return ans % mod
+};
+
+
+
 console.log(sumSubarrayMins([3, 1, 2, 4])); // 17
 console.log(sumSubarrayMins([11, 81, 94, 43, 3])); // 444
