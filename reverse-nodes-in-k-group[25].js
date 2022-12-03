@@ -5,50 +5,44 @@
  *     this.next = (next===undefined ? null : next)
  * }
  */
+const myReverse = (head, tail) => {
+  let prev = tail.next;
+  let p = head;
+  while (prev !== tail) {
+    const nex = p.next;
+    p.next = prev;
+    prev = p;
+    p = nex;
+  }
+  return [tail, head];
+}
+
 /**
  * @param {ListNode} head
  * @param {number} k
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-  const len = getLen(head)
-  // k 为 1 或长度 < k 则翻转无意义直接返回
-  if (k === 1 || len < k) return head;
+  const hair = new ListNode(0);
+  hair.next = head;
+  let pre = hair;
 
-  let prev = { next: head }, cnt = k;
-
-  let tail = head, hair = null;
-  for (let i = 0; i < Math.floor(len / k); i++) {
-    let tail = head;
-    hair = revert(prev, cnt);
-  }
-
-  while (cnt && prev.next) {
-    revert(prev, cnt);
-  }
-
-  
-};
-
-function getLen (head) {
-  let count = 0;
   while (head) {
-    count++;
-    head = head.next;
+    let tail = pre;
+    // 查看剩余部分长度是否大于等于 k
+    for (let i = 0; i < k; ++i) {
+      tail = tail.next;
+      if (!tail) {
+        return hair.next;
+      }
+    }
+    const nex = tail.next;
+    [head, tail] = myReverse(head, tail);
+    // 把子链表重新接回原链表
+    pre.next = head;
+    tail.next = nex;
+    pre = tail;
+    head = tail.next;
   }
-  return count;
-}
-
-function revert (prevNode, count) {
-  let cur = prevNode.next;
-  let tail = cur;
-  let prev = null;
-  while (count-- && cur) {
-    const { next } = cur;
-    cur.next = prev;
-    prev = cur;
-    cur = next;
-  }
-  prevNode.next = prev;
-  tail.next = cur;
-}
+  return hair.next;
+};
