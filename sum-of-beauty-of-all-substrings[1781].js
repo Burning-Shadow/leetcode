@@ -69,5 +69,5 @@ const beautySum = function (s) {
 
 
 
-console.log(beautySum());
-console.log(beautySum());
+console.log(beautySum("aabcb")); // 5
+console.log(beautySum("aabcbaa")); // 17
