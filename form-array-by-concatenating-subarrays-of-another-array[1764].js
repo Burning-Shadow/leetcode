@@ -4,18 +4,31 @@
  * @return {boolean}
  */
 var canChoose = function (groups, nums) {
-  const num = nums.join("");
-  let last = 0; // 记录上一次的位置
-  for (let i = 0; i < groups.length; i++) {
-    const group = groups[i].join("");
-    const index = num.indexOf(group, last);
-    if (index === -1) return false;
-    else {
-      last = index + group.length;
+  let i = 0;
+  const check = (g, nums, k) => {
+    if (k + g.length > nums.length) {
+      return false;
+    }
+    for (let j = 0; j < g.length; j++) {
+      if (g[j] !== nums[k + j]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  for (let k = 0; k < nums.length && i < groups.length;) {
+    if (check(groups[i], nums, k)) {
+      k += groups[i].length;
+      i++;
+    } else {
+      k++;
     }
   }
-  return true;
-};
+  return i === groups.length;
+}
+
+
 
 
 /**
