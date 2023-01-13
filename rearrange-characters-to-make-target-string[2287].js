@@ -1,0 +1,39 @@
+/**
+ * @param {string} s
+ * @param {string} target
+ * @return {number}
+ */
+var rearrangeCharacters = function (s, target) {
+  const sCounts = new Map();
+  const targetCounts = new Map();
+  const n = s.length, m = target.length;
+  for (let i = 0; i < m; i++) {
+    const c = target[i];
+    targetCounts.set(c, (targetCounts.get(c) || 0) + 1);
+  }
+  for (let i = 0; i < n; i++) {
+    const c = s[i];
+    if (targetCounts.has(c)) {
+      sCounts.set(c, (sCounts.get(c) || 0) + 1);
+    }
+  }
+  let result = Number.MAX_VALUE;
+  for (const [c, count] of targetCounts.entries()) {
+    const totalCount = sCounts.has(c) ? sCounts.get(c) : 0;
+    result = Math.min(result, Math.floor(totalCount / count));
+    if (result === 0) {
+      return 0;
+    }
+  }
+  return result;
+};
+
+
+
+
+
+
+
+console.log(rearrangeCharacters("ilovecodingonleetcode", "code")); // 2
+console.log(rearrangeCharacters("abcba", "abc")); // 1
+console.log(rearrangeCharacters("abbaccaddaeea", "aaaaa")); // 1
