@@ -38,17 +38,17 @@ var findSolution = function (customfunction, z) {
  * 双指针
  * https://leetcode.cn/problems/find-positive-integer-solution-for-a-given-equation/solutions/2117698/xiang-xiang-shuang-zhi-zhen-yi-ge-shi-pi-nr4y/
  */
-var findSolution = function(customfunction, z) {
-  const res = [];
+var findSolution = function (customfunction, z) {
+  const result = [];
   for (let x = 1, y = 1000; x <= 1000 && y >= 1; x++) {
-      while (y >= 1 && customfunction.f(x, y) > z) {
-          y--;
-      }
-      if (y >= 1 && customfunction.f(x, y) === z) {
-          res.push([x, y]);
-      }
+    while (y >= 1 && customfunction.f(x, y) > z) {
+      y--;
+    }
+    if (y >= 1 && customfunction.f(x, y) === z) {
+      result.push([x, y]);
+    }
   }
-  return res;
+  return result;
 };
 
 
@@ -56,4 +56,5 @@ var findSolution = function(customfunction, z) {
 
 
 
-console.log(findSolution());
+console.log(findSolution(1, 5)); // [[1,4],[2,3],[3,2],[4,1]]
+console.log(findSolution(2, 5)); // [[1,5],[5,1]]
