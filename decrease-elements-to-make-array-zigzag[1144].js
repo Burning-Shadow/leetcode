@@ -25,4 +25,5 @@ const help = (nums, pos) => {
 
 
 
-console.log(movesToMakeZigzag()); // 
+console.log(movesToMakeZigzag([1,2,3])); // 2
+console.log(movesToMakeZigzag([9,6,1,6,2])); // 4
